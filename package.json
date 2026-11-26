@@ -1,0 +1,9 @@
+{
+  "name": "bucket-buster",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Find and read your own brand's publicly-exposed S3 / GCS buckets.",
+  "type": "module",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=20" }
+}

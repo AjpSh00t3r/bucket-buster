@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bucket Buster</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body data-state="idle">
+<main class="shell">
+  <header>
+    <div class="brand"><span class="mark" aria-hidden="true">⛁</span><h1>Bucket Buster</h1></div>
+    <p class="sub">Find the public cloud-storage buckets exposed under your own brand name, across S3 and Google Cloud Storage.</p>
+  </header>
+
+  <p class="auth" role="note">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg>
+    Authorized self-audit of a brand you own. Requests are locked to names derived from your brand, and only already-public data is read.
+  </p>
+
+  <form id="form" class="target" autocomplete="off">
+    <span class="pre" aria-hidden="true">brand://</span>
+    <label class="sr-only" for="brand">Your brand or bucket name</label>
+    <input id="brand" name="brand" type="text" inputmode="url" spellcheck="false" placeholder="your-brand" required>
+    <button class="raid" id="go" type="submit">RAID</button>
+    <label class="consent"><input id="own" type="checkbox" required><span>I own this bucket / brand</span></label>
+  </form>
+
+  <section class="readout" aria-live="polite">
+    <div class="cell"><span class="k">Names probed</span><span class="v" id="r-probed">0</span></div>
+    <div class="cell grn"><span class="k">Public buckets</span><span class="v" id="r-buckets">0</span></div>
+    <div class="cell dim"><span class="k">Exist but locked</span><span class="v" id="r-private">0</span></div>
+  </section>
+  <div class="bar" aria-hidden="true"><span id="bar"></span></div>
+  <p class="status" id="status">Enter your brand and press RAID.</p>
+
+  <section class="counter-wrap" id="counter-wrap" hidden>
+    <span class="counter-label">files exposed</span>
+    <span class="counter" id="counter">0</span>
+    <span class="counter-sub" id="counter-sub"></span>
+  </section>
+
+  <section class="cascade" id="cascade" aria-live="off"></section>
+
+  <section class="buckets" id="buckets" hidden>
+    <h2>Public buckets found</h2>
+    <ul id="bucket-list"></ul>
+  </section>
+
+  <div class="empty" id="empty" hidden></div>
+
+  <section class="defence">
+    <h2>Defence</h2>
+    <p>Turn on <b>S3 Block Public Access</b> (account- and bucket-level) and the GCS equivalent, <b>disable anonymous/public listing</b>, remove <code>allUsers</code> / <code>AllUsers</code> grants, and move anything that must be public behind a CDN with an explicit allowlist.</p>
+  </section>
+
+  <p class="foot">Runs locally. The server reads only public bucket listings for names built from your brand; it writes, downloads and alters nothing.</p>
+</main>
+
+<script src="/app.js" type="module"></script>
+</body>
+</html>
